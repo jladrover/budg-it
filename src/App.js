@@ -6,8 +6,18 @@ function App() {
   const [datetime, setDatetime] = useState('');
   const [description, setDescription] = useState('');
 
-  function processTransaction() {
-    
+  function processTransaction(ev) {
+      ev.preventDefault();
+      const url = process.env.REACT_APP_URL_FOR_API+'/transaction';
+      // console.log(url);
+      fetch(url,{
+        method: 'POST',
+        headers: {'Content-type': 'application/json'},
+        body: JSON.stringify({name,description,datetime})
+      }).then(response => {
+        response.json().then(json => {
+          console.log('result',json);});
+      });
   }
 
   return (
