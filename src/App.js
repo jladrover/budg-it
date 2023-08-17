@@ -1,15 +1,27 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 
 function App() {
   const [name, setName] = useState('');
   const [datetime, setDatetime] = useState('');
   const [description, setDescription] = useState('');
+  const [transactions, setTranscations] = useState([]);
+
+  useEffect(() => {
+    getTransactions().then(setTranscations);
+  }, []);
+
+  async function getTransactions() {
+    const url = process.env.REACT_APP_URL_FOR_API + '/transactions';
+    const response = await fetch(url);
+    return await response.json();
+  }
 
   function processTransaction(ev) {
       ev.preventDefault();
       const url = process.env.REACT_APP_URL_FOR_API + '/transaction';
       const price = name.split(" ")[0];
+      
       // console.log(url);
       fetch(url,{
         method: 'POST',
@@ -35,7 +47,7 @@ function App() {
           <input type='text' 
           value={name}
           onChange={ev => setName(ev.target.value)}
-          placeholder={'+180 Asus Motherboard'}/>
+          placeholder={'-180 Asus Motherboard'}/>
           <input value={datetime}
           onChange={ev => setDatetime(ev.target.value)}
           type='datetime-local'/>
@@ -49,36 +61,21 @@ function App() {
         <button type='submit'>Add a new transaction</button>
       </form>
       <div className='transactions'>
-        <div className='transaction'>
+        {transactions.length > 0 && transactions.map(transaction => (
+          <div className='transaction'>
           <div className='left'>
-            <div className='name'>New Asus motherboard</div>
-            <div className='description'>Part for pc build</div>
+            <div className='name'>{transaction.name}</div>
+            <div className='description'>{transaction.description}</div>
           </div>
           <div className='right'>
-            <div className='price red'>-$180</div>
-            <div className='datetime'>2023-08-05 12:41</div> 
+            <div className={'price ' + (transaction.price > 0?'green':'red')}>
+              {transaction.price}
+            </div>
+            <div className='datetime'>{transaction.datetime}</div> 
           </div>
         </div>
-        <div className='transaction'>
-          <div className='left'>
-            <div className='name'>Garage sale</div>
-            <div className='description'>Sold miscellaneous items</div>
-          </div>
-          <div className='right'>
-            <div className='price green'>+$310</div>
-            <div className='datetime'>2023-08-04 14:23</div> 
-          </div>
-        </div>
-        <div className='transaction'>
-          <div className='left'>
-            <div className='name'>Car repair cost</div>
-            <div className='description'>Oil change</div>
-          </div>
-          <div className='right'>
-            <div className='price red'>-$55</div>
-            <div className='datetime'>2023-08-01 15:19</div> 
-          </div>
-        </div>
+        ))}
+        
       </div>
     </main>
   );
