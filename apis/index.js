@@ -1,16 +1,23 @@
 const express = require('express');
+require('dotenv').config();
 const app = express();
 const cors = require('cors');
+const Transaction = require('./models/transaction.js');
+const { default: mongoose } = require('mongoose');
 
 app.use(cors());
 app.use(express.json());
-app.get('/apis/test', (request,response) => {
+app.get('/apis/test', (request, response) => {
     response.json('test-working!')
 });
 
-app.post('/apis/transaction', (request,response) => {
-    response.json(request.body)
+app.post('/apis/transaction', async (request,response) => {
+    await mongoose.connect(process.env.MONGODB_URL);
+    const {name,description, datetime} = request.body;
+    const transaction = await Transaction.create({name,description,datetime});
+    response.json(transaction);
 });
 
 app.listen(5000);
 // ^ port for backend
+// 
