@@ -39,9 +39,18 @@ function App() {
       });
   }
 
+  let balance = 0;
+  for (const transaction of transactions) {
+    balance += transaction.price;
+  }
+
+  balance = balance.toFixed(2);
+  const coinChange = balance.split(".")[1];
+  balance = balance.split(".")[0]; 
+
   return (
     <main>
-      <h1>$400<span>.00</span></h1>
+      <h1>${balance}<span>.{coinChange}</span></h1>
       <form onSubmit={processTransaction}>
         <div className='mainInputs'>
           <input type='text' 
@@ -56,7 +65,7 @@ function App() {
           <input type='text' 
           value={description}
           onChange={ev => setDescription(ev.target.value)}
-          placeholder='purchased on sale for new pc build'/>
+          placeholder='purchased for new pc build'/>
         </div>
         <button type='submit'>Add a new transaction</button>
       </form>
