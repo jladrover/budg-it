@@ -13,10 +13,17 @@ app.get('/apis/test', (request, response) => {
 
 app.post('/apis/transaction', async (request,response) => {
     await mongoose.connect(process.env.MONGODB_URL);
-    const {name,description, datetime} = request.body;
-    const transaction = await Transaction.create({name,description,datetime});
+    const {name,description, datetime, price} = request.body;
+    const transaction = await Transaction.create({name,description,datetime, price});
     response.json(transaction);
 });
+
+app.get('/apis/transactions', async (request, response) => {
+    await mongoose.connect(process.env.MONGODB_URL);
+    const totalTransactions = await Transaction.find();
+    response.json(totalTransactions);
+});
+
 
 app.listen(5000);
 // ^ port for backend

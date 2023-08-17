@@ -8,14 +8,21 @@ function App() {
 
   function processTransaction(ev) {
       ev.preventDefault();
-      const url = process.env.REACT_APP_URL_FOR_API+'/transaction';
+      const url = process.env.REACT_APP_URL_FOR_API + '/transaction';
+      const price = name.split(" ")[0];
       // console.log(url);
       fetch(url,{
         method: 'POST',
         headers: {'Content-type': 'application/json'},
-        body: JSON.stringify({name,description,datetime})
+        body: JSON.stringify({ price,
+          name:name.substring(price.length + 1),
+          description,
+          datetime,})
       }).then(response => {
         response.json().then(json => {
+          setName("");
+          setDescription("");
+          setDatetime("");
           console.log('result',json);});
       });
   }
