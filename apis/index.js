@@ -24,7 +24,10 @@ app.get('/apis/transactions', async (request, response) => {
     response.json(totalTransactions);
 });
 
+if (process.env.API_PORT) {
+    app.listen(process.env.API_PORT);
+}
 
-app.listen(5000);
+module.exports = app; 
 // ^ port for backend
 // 
