@@ -1,4 +1,4 @@
-# Budgeting App
+# Budgeting Web-Application
 This is a simple MERN stack web-app that allows you to track transactions with name, description, and date fields. A total balance calculation based on the transactions entered is provided as well. Entries are stored in a serverless instance on MongoDB atlas.
 
 ## Tech stack
@@ -14,7 +14,8 @@ Enter a new transaction by providing a name, description, and date in the input 
 - Transaction yielding income: "+200 housekeeping gig" or "200 housekeeping gig"
 - Transaction yielding expenses: "-250 credit card annual fee"
 <br> <br>
-Total balance is displayed at the top of the page, reflecting the cumulative effect of all transactions by users.
+
+Total balance is displayed at the top of the page, reflecting the cumulative effect of all transactions.
 ## Contributing
 Contributing to this github repo in basic steps:
 * Fork this repo
