@@ -14,10 +14,8 @@ function App() {
   async function getTransactions() {
     const url = process.env.REACT_APP_URL_FOR_API + '/transactions';
     const response = await fetch(url);
-    const transactionsData = await response.json();
-    setTransactions(transactionsData);
+    return await response.json();
   }
-
 
   function processTransaction(ev) {
       ev.preventDefault();
@@ -37,7 +35,6 @@ function App() {
           setName("");
           setDescription("");
           setDatetime("");
-          setTransactions([...transactions, json]);
           console.log('result',json);});
       });
   }
