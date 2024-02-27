@@ -16,6 +16,7 @@ Enter a new transaction by providing a name, description, and date in the input 
 <br> <br>
 
 Total balance is displayed at the top of the page, reflecting the cumulative effect of all transactions from all users trying the demo page.
+**Note:** Refresh the page to see added transaction.
 ## Contributing
 Contributing to this github repo in basic steps:
 * Fork this repo
