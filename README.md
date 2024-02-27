@@ -1,5 +1,5 @@
-# Budgeting Web-Application
-This is a simple MERN stack web-app that allows you to track transactions with name, description, and date fields. A total balance calculation based on the transactions entered is provided as well. Entries are stored in a serverless instance on MongoDB atlas.
+# Budg-It
+This is a simple MERN stack web application that allows you to track transactions with name, description, and date fields. A total balance calculation based on the transactions entered is provided as well. Entries are stored in a serverless instance on MongoDB atlas.
 
 ## Tech stack
 1. MongoDB: Database for storing transactions
